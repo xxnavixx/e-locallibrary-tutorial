@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	h1=title
+
+	form(action='' method='post')
+		label(for='n1') author name first :
+		input#n1(type='text' name='firstname' value=(author?author.first_name:''))
+		label(for='n2') author name second :
+		input#n2(type='text' name='secondname' value=(author?author.family_name:''))
+		label(for='birth') date-of-birth :
+		-console.log('author.date b : '+author.date_of_birth_formatted_2);
+		-console.log('author.date d : '+author.date_of_death_formatted_2);
+		input#birth(type='date' name='datebirth' value=(author?author.date_of_birth_formatted_2:''))
+		label(for='death') date-of-death :
+		input#death(type='date' name='datedeath' value=(author?author.date_of_death_formatted_2:''))
+		input(type='submit' value='Update')
+	if errors
+		for xx in errors
+			p #{xx.msg}

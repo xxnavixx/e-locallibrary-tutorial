@@ -1,0 +1,35 @@
+extends layout
+
+block content
+ h1=title
+ 
+ form(action='' method='POST')
+  div
+   label(for='booktitle') title :
+   input#booktitle(type='text' name='booktitle' value=(book===undefined?'':book.title))
+  div
+   label(for='bookauthor') author :
+   select#bookauthor(type='select' name='bookauthor')
+    each xxx in authorList  
+     if book
+      option(value=xxx._id selected=(xxx._id.toString()==book.author ? 'selected' : false) ) #{xxx.name}
+     else
+      option(value=xxx._id) #{xxx.name}
+  div
+   label(for='booksummary') summary :
+   input#booksummary(type='text' name='booksummary' value=(book===undefined?'':book.summary))
+  div
+   label(for='bookisbn') isbn :
+   input#bookisbn(type='text' name='bookisbn' value=(book===undefined?'':book.isbn))
+  div
+   label(for='bookgenre') genre :
+   each xxx in genreList
+    input(type='checkbox' name='bookgenre' id=xxx._id value=xxx._id)
+    label(for=xxx.id) #{xxx.name}
+  div
+   input#bookcreate(type='submit' value='create')
+ 
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

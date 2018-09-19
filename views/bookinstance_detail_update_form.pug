@@ -1,0 +1,54 @@
+extends layout
+
+block content
+
+ h1=title
+ 
+ - var aFlag,bFlag,cFlag,dFlag;var bookFlag=false;
+ form(action='' method='POST')
+  div
+   label(for='selA' ) Book Title : 
+   select#selA(name='booktitle')
+    -//console.log('book_instance.book : '+book_instance.book);
+    for xx in bookList
+      - 
+        //console.log('bookList.xx.id : '+xx._id+' book_instance.book : '+book_instance.book);
+        if (xx._id == book_instance.book.toString()) bookFlag ='selected';
+        else bookFlag=false;		
+      option(value=xx._id selected=bookFlag) #{xx.title}
+   label(for='inA') Imprint : 
+   input#inA(type='text' name='imprint' value=book_instance.imprint)
+   label(for='inB') Status : 
+   select#selB(name='status')
+    -
+     aFlag=bFlag=cFlag=dFlag=false;
+     switch(book_instance.status){
+      case 'Available':
+       aFlag='selected';
+       break;
+      case 'Maintenance':
+       bFlag='selected';	  
+       break;	   
+      case 'Loaned':     
+       cFlag='selected';
+       break;	   
+      case 'Reserved':
+       dFlag='selected';	
+       break;	   
+      }	   
+    option(value='Available' selected=aFlag) Available
+    option(value='Maintenance' selected=bFlag) Maintenance
+    option(value='Loaned' selected=cFlag) Loaned
+    option(value='Reserved' selected=dFlag) Reserved
+   label(for='inC') Due back : 
+   -//console.log('--oo-- due back : '+book_instance.due_back);
+   -if(book_instance.status == 'Available') dateValue=' ';
+   -else dateValue=book_instance.due_back_formatted_2;
+   -console.log('--kk-- dateValue : '+  book_instance.due_back_formatted_2);
+   input#inC(type='date' name='dueback' value=dateValue)
+   -//console.log('--kk-- due back : '+  book_instance.due_back_formatted_2);
+   input(type='submit' value='Update')
+ if errors 
+  ul
+   for error in errors
+    li!= error.msg

@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+h1=title
+
+form(action='' method='post')
+ label(for='n1') author name first :
+ input#n1(type='text' name='firstname')
+ label(for='n2') author name seconde :
+ input#n2(type='text' name='secondname')
+ label(for='birth') date-of-birth :
+ input#birth(type='date' name='datebirth')
+ label(for='death') date-of-death :
+ input#death(type='date' name='datedeath')
+ input(type='submit' value='create')

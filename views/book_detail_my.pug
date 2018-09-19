@@ -1,0 +1,21 @@
+extends layout
+
+block content
+ h1=title
+ 
+ ul
+  if book
+   li
+    p title: #{book.title}, summary: #{book.summary}
+   li
+    p author: #{book.author.name} ,#{book.author.date_of_birth_formatted} ~ #{book.author.date_of_death_formatted}
+  else
+   li no items
+   
+ ul
+  if book.genre
+   li
+    p genre1:#{book.genre} genre2:#{book.genre[0].name} genre3:#{book.genre[0]._id}
+  else
+   li no genre items
+ 

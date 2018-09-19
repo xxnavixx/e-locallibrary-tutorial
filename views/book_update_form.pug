@@ -1,0 +1,53 @@
+extends layout
+
+block content
+ h1=title
+ 
+ form(action='' method='POST')
+  if book 
+   div
+    label(for='booktitle') title :
+    input#booktitle(type='text' name='booktitle' value=book.title)
+   div
+    label(for='bookauthor') author :
+    select#bookauthor(type='select' name='bookauthor')
+     each xxx in authorList  
+      if book
+       -//console.log('type-xxx._id : '+(typeof xxx._id));
+       -//console.log('type-book.author : '+(typeof book.author));
+       -//console.log('type-book.author : '+(typeof book.author.toString()));	   
+       option(value=xxx._id selected=(xxx._id==book.author.toString() ? 'selected' : false) ) #{xxx.name}
+      else
+       option(value=xxx._id) #{xxx.name}
+   div
+    label(for='booksummary') summary :
+    input#booksummary(type='text' name='booksummary' value=book.summary)
+   div
+    label(for='bookisbn') isbn :
+    input#bookisbn(type='text' name='bookisbn' value=book.isbn)
+   div
+    label(for='bookgenre') genre :
+    each xxx in genreList
+     -var tempFlag=false;
+     -
+      for(var i=0;i<book.genre.length;i++){
+      //console.log(book.genre[i]._id+' type-'+(typeof book.genre[i]._id)+' : '+xxx._id+' type-'+(typeof xxx._id));
+      if(book.genre[i]._id == xxx._id.toString()) {
+          console.log('match');
+          tempFlag=true;
+          break;
+        } else {console.log('no match');}
+      }
+     if tempFlag
+      input(type='checkbox' name='bookgenre' id=xxx._id value=xxx._id checked=true)
+     else
+      input(type='checkbox' name='bookgenre' id=xxx._id value=xxx._id)
+     label(for=xxx.id) #{xxx.name}
+   div
+    input#bookcreate(type='submit' value='update')
+  else	
+   p can't find book record to update
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg

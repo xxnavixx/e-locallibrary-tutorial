@@ -1,0 +1,22 @@
+extends layout
+
+block content
+
+ h1=title
+
+ form(action='' method='post')
+  div
+   label(for='n1') author name first :
+   input#n1(type='text' name='firstname' value=(undefined===prevData ? '' : prevData.first_name))
+   label(for='n2') author name seconde :
+   input#n2(type='text' name='secondname' value=(undefined===prevData ? '' : prevData.second_name))
+  div
+   label(for='birth') date-of-birth :
+   input#birth(type='date' name='datebirth' value=(undefined===prevData ? '' : prevData.datebirth))
+   label(for='death') date-of-death :
+   input#death(type='date' name='datedeath' value=(undefined===prevData ? '' : prevData.datedeath))
+   input(type='submit' value='create')
+  
+ if errors
+  each xx in errors
+   li=xx.msg

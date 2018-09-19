@@ -1,0 +1,33 @@
+extends layout
+
+block content
+
+ h1=title
+ 
+ form(action='' method='POST')
+  div
+   label(for='selA' ) Book Title : 
+   select#selA(name='booktitle')
+    for xx in bookList
+     option(value=xx._id) #{xx.title}
+   label(for='inA') Imprint : 
+   input#inA(type='text' name='imprint')
+   label(for='inB') Status : 
+   select#selB(name='status')
+    option(value='Available') Available
+    option(value='Maintenance') Maintenance
+    option(value='Loaned') Loaned
+    option(value='Reserved') Reserved
+   label(for='inC') Due back : 
+   input#inC(type='date' name='dueback')
+   input(type='submit' value='Add copy')
+ if errors 
+  ul
+   for error in errors
+    li!= error.msg
+   
+	 
+	 
+	 
+	 
+  

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+    each xxx in genre_list
+      li 
+        a(href=xxx.url) #{xxx.name} 
+        
+    else
+      li There are no genre.

@@ -1,0 +1,23 @@
+extends layout
+
+block content
+ h1 ID: #{result._id}
+ 
+ p #[strong Title:]
+   a(href=result.book.url) #{result.book.title}
+ p #[strong Imprint:] #{result.imprint}
+ 
+ p #[strong Status:]
+   if result.status=='Available'
+    span.text-success #{result.status}
+   else if result.status=='Maintenance'
+    span.text-danger #{result.status}
+   else
+    span.text-warninig #{result.status}
+	
+ if result.status!='Available'
+  p #[strong Due Back:] #{result.due_back_formatted}
+ p
+  a(href=result.url+'/update') update
+ p
+  a(href=result.url+'/delete') delete this instance

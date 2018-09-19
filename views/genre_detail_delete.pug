@@ -1,0 +1,24 @@
+extends layout
+
+block content
+
+  h1 Genre: #{genre.name}
+  
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Books
+    
+    dl
+    if deletable
+      p This genre has no books
+      p you sure want to delete this genre?
+      form(action='' method='POST')
+        input(type='hidden' name='genreId' value=genre._id)
+        input(type='submit' value='yes delete')
+    else
+      each book in bookList
+        dt 
+          a(href=book.url) #{book.title}
+        dd #{book.summary}
+      p you can't delete this genre. there must be no books refering this genre.
+      
